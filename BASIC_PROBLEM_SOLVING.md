@@ -1,7 +1,5 @@
 # Basic Problem Solving
 
----
-
 # 1. Reverse Words in a Sentence
 
 ## Problem
@@ -23,8 +21,6 @@ Return a new sentence where **word order is reversed but words remain unchanged*
 ```
 "World Hello"
 ```
-
----
 
 ## How to Think
 
@@ -50,17 +46,13 @@ If we reverse the array:
 
 Joining them again with spaces gives the result.
 
----
-
 ## Algorithm
 
 1. Split the sentence into words.
 2. Reverse the array.
 3. Join words back into a string.
 
----
-
-## JavaScript Solution
+## Solution
 
 ```javascript
 function reverseWords(sentence) {
@@ -101,8 +93,6 @@ target = 9
 [[2,7]]
 ```
 
----
-
 ## How to Think
 
 A **pair** means two numbers.
@@ -122,17 +112,13 @@ Example:
 2 + 11 = 13 ✖
 ```
 
----
-
 ## Algorithm
 
 1. Loop through the array.
 2. For each element, check the remaining elements.
 3. If sum equals target → store pair.
 
----
-
-## JavaScript Solution
+## Solution
 
 ```javascript
 function findPairs(arr, target) {
@@ -179,8 +165,6 @@ Return **true** if palindrome, otherwise **false**.
 true
 ```
 
----
-
 ## How to Think
 
 A **palindrome** means:
@@ -207,17 +191,13 @@ arr[1] === arr[last-1]
 
 If all match → palindrome.
 
----
-
 ## Algorithm
 
 1. Compare first and last element.
 2. Move inward.
 3. If any pair mismatches → return false.
 
----
-
-## JavaScript Solution
+## Solution
 
 ```javascript
 function isPalindrome(arr) {
@@ -259,8 +239,6 @@ Return a string containing **only unique characters**.
 "progamin"
 ```
 
----
-
 ## How to Think
 
 We need to **keep track of characters we already used**.
@@ -277,17 +255,13 @@ r → skip (already exists)
 
 So we only add characters **if we haven't seen them before**.
 
----
-
 ## Algorithm
 
 1. Create an empty result string.
 2. Loop through characters.
 3. Add character only if not already included.
 
----
-
-## JavaScript Solution
+## Solution
 
 ```javascript
 function removeDuplicates(str) {
@@ -331,8 +305,6 @@ Return the number of vowels.
 3
 ```
 
----
-
 ## How to Think
 
 English vowels are:
@@ -352,17 +324,13 @@ l → no
 o → yes
 ```
 
----
-
 ## Algorithm
 
 1. Define vowels.
 2. Loop through characters.
 3. Increase count when vowel found.
 
----
-
-## JavaScript Solution
+## Solution
 
 ```javascript
 function countVowels(str) {
@@ -407,8 +375,6 @@ Move the last **k characters to the beginning**.
 "lohel"
 ```
 
----
-
 ## How to Think
 
 Break the string into **two parts**.
@@ -431,17 +397,13 @@ Then swap order:
 lo + hel
 ```
 
----
-
 ## Algorithm
 
 1. Take last `k` characters.
 2. Take remaining characters.
 3. Combine them.
 
----
-
-## JavaScript Solution
+## Solution
 
 ```javascript
 function rotateString(str, k) {
@@ -480,8 +442,6 @@ Return the updated array.
 [1,3,12,0,0]
 ```
 
----
-
 ## How to Think
 
 Separate numbers into **two groups**:
@@ -491,8 +451,6 @@ Separate numbers into **two groups**:
 
 Then combine them.
 
----
-
 ## Algorithm
 
 1. Extract non-zero numbers.
@@ -501,7 +459,7 @@ Then combine them.
 
 ---
 
-## JavaScript Solution
+## Solution
 
 ```javascript
 function moveZeros(arr) {
@@ -518,3 +476,212 @@ function moveZeros(arr) {
 ```
 
 ---
+
+
+# 8. Rotate a Matrix 90° Clockwise
+
+### Problem
+
+Given a 2D matrix, rotate it **90 degrees clockwise**.
+For example, the first row becomes the last column, the second row becomes the second-to-last column, and so on.
+
+### What is Expected
+
+Return a **new 2D matrix** rotated 90° clockwise.
+
+### Input
+
+```javascript
+[
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+]
+```
+
+### Output
+
+```javascript
+[
+  [7, 4, 1],
+  [8, 5, 2],
+  [9, 6, 3]
+]
+```
+
+## How to Think
+
+Think of a matrix as a **grid of rows and columns**.
+
+* **Original:**
+
+```
+1 2 3
+4 5 6
+7 8 9
+```
+
+* **Rotated 90° clockwise:**
+
+```
+7 4 1
+8 5 2
+9 6 3
+```
+
+* The **first row `[1,2,3]` becomes the last column**
+* The **second row `[4,5,6]` becomes the second column**
+* The **third row `[7,8,9]` becomes the first column**
+
+So, the value at **mat[i][j]** in the original matrix moves to **res[j][n-1-i]** in the rotated matrix.
+
+## Algorithm
+
+1. Get the size of the matrix `n` (assume square matrix).
+2. Create a new empty matrix `res` of same size.
+3. Loop through each row `i` and column `j` of the original matrix: Move `mat[i][j]` to `res[j][n-1-i]`
+4. Return the new rotated matrix.
+
+## Solution
+
+```javascript
+function rotateMatrix(mat) {
+ // number of rows (and columns, since square)
+  const n = mat.length;
+  
+  // create empty matrix to store rotated values
+  const res = Array.from({ length: n }, () => Array(n));
+
+  // loop through every element in original matrix
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < n; j++) {
+      // move element mat[i][j] to rotated position res[j][n-1-i]
+      res[j][n - 1 - i] = mat[i][j];
+    }
+  }
+
+  return res; // return the rotated matrix
+}
+```
+
+---
+
+# 9. Find Majority Element
+
+### Problem
+
+Given an array, find the element that appears **more than n/2 times**, if it exists.
+
+* If no element appears more than half the time, return `null`.
+
+### What is Expected
+
+Return the **majority element** or `null`.
+
+### Input
+
+```javascript
+[3, 3, 4, 2, 3, 3]
+```
+
+### Output
+
+```javascript
+3
+```
+
+## How to Think
+
+A **majority element** is one that occurs **more than half the array size**.
+
+* Count how many times each element appears.
+* If the count is greater than `n / 2`, it’s the majority.
+
+
+## Algorithm
+
+1. Create an **empty object** to count occurrences of each element.
+2. Loop through the array and **increment the count** in the object.
+3. If count of an element **exceeds n/2**, return that element.
+4. If no element exceeds n/2, return `null`.
+
+## Solution
+
+```javascript
+function majorityElement(arr) {
+  const countMap = {}; // object to store frequency
+
+  for (let num of arr) {
+    // increment count of current number
+    countMap[num] = (countMap[num] || 0) + 1;
+
+    // check if this number is now majority
+    if (countMap[num] > arr.length / 2) return num;
+  }
+
+  // no majority element found
+  return null;
+}
+```
+
+---
+
+# 10. Find Missing Elements in a Consecutive Sequence
+
+### Problem
+
+Given an unsorted array of numbers that **should form a consecutive sequence**, return **all missing numbers**.
+
+### What is Expected
+
+Return an array of numbers that are missing from the consecutive sequence.
+
+### Input
+
+```javascript
+[1, 2, 4, 6]
+```
+
+### Output
+
+```javascript
+[3, 5]
+```
+
+## How to Think
+
+A **consecutive sequence** is a sequence of numbers with **no gaps**.
+
+**Steps to find missing numbers:**
+
+1. Find the **minimum and maximum** numbers in the array.
+2. Loop from **min to max**.
+3. If a number is **not in the array**, add it to the result.
+
+## Algorithm
+
+1. Initialize an empty array `missing`.
+2. Get `min` and `max` of the array.
+3. Loop `i` from `min` to `max`: If `i` is **not included** in the array, push to `missing`.
+4. Return `missing` array.
+
+## Solution
+
+```javascript
+function findMissingElements(arr) {
+  const missing = [];
+  const min = Math.min(...arr); // smallest number
+  const max = Math.max(...arr); // largest number
+
+  for (let i = min; i <= max; i++) {
+    if (!arr.includes(i)) { // if number is missing
+      missing.push(i);
+    }
+  }
+
+  return missing;
+}
+```
+
+---
+
