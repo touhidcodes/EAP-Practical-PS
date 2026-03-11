@@ -457,8 +457,6 @@ Then combine them.
 2. Extract zeros.
 3. Combine arrays.
 
----
-
 ## Solution
 
 ```javascript
